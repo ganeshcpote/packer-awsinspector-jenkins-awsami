@@ -5,7 +5,7 @@ The idea behind this solution is to create the Jenkins Pipeline to create AWS AM
 
 ## Installation and Usage instructions
 
-**Important Note**
+**Important Note: **
 Please download jdk-8u251-linux-x64.tar.gz file and add into current repository root folder or udpate the download location path in the script before running the script using Jenkins
 
 1. Create AWS Assessment target and assessment template for tag as "Name=Packer Builder". Please note that this is the default name of Packer Build EC2 Instance which get created during image creation process.
