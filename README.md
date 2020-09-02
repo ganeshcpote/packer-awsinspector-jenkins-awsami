@@ -5,7 +5,6 @@ The idea behind this solution is to create the Jenkins Pipeline to create AWS AM
 
 ## Installation and Usage instructions
 
-### Part 1 : Deploying
 1. Create AWS Assessment target and assessment template for tag as "Name=Packer Builder". Please note that this is the default name of Packer Build EC2 Instance which get created during image creation process.
 
 2. Create Jenkins Pipeline Job by pointing to Jenkinsfile groovy file
