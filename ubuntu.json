@@ -1,0 +1,68 @@
+{
+    "variables": {
+      "aws_access_key": "",
+      "aws_secret_key": "",
+      "install_package": "ubuntu",
+      "aws_source_ami": "ami-07ebfd5b3428b6f4d"
+    },
+    "builders": [{
+      "name":"Demo-Golden-Image",
+      "type": "amazon-ebs",
+      "access_key": "{{user `aws_access_key`}}",
+      "secret_key": "{{user `aws_secret_key`}}",
+      "region": "us-east-1",
+      "source_ami": "{{user `aws_source_ami`}}",
+      "instance_type": "t2.micro",
+      "ssh_username": "ubuntu",
+      "ami_name": "Demo-{{user `install_package`}}-ami-{{timestamp}}",
+      "tags": {
+        "OS_Version": "Ubuntu",
+        "Installation-Package" : "{{user `install_package`}}",
+        "Release-Date": "{{timestamp}}",
+        "Base_AMI_Name": "{{user `aws_source_ami`}}",
+        "InspectorTag": "Packer Builder",
+        "Name": "Demo-{{user `install_package`}}-ami-{{timestamp}}"
+      }
+    }],
+    "provisioners": [
+        {
+          "type": "file",
+          "source": "jdk-8u251-linux-x64.tar.gz",
+          "destination": "/tmp/jdk-8u251-linux-x64.tar.gz"
+        },
+        {
+          "type": "shell",
+          "script": "base.sh"
+        },
+        {
+            "type": "shell",
+            "script": "{{user `install_package`}}.sh"
+        },
+        {
+          "type": "shell",
+          "script": "cleanup.sh"
+        },
+        {
+          "type": "shell",
+          "script": "inspector.sh"
+        },
+        {
+          "type": "shell-local",
+          "script": "execute_aws_inspector.py",
+          "execute_command": ["/bin/sh", "-c", "{{.Vars}} python {{.Script}}"]
+
+        }
+    ],
+    "post-processors": [
+      {
+        "type": "manifest",
+        "output": "manifest.json",
+        "strip_path": true,
+        "custom_data": {
+          "os": "ubuntu",
+          "Installation-Package" : "{{user `install_package`}}",
+          "Name": "Demo-{{user `install_package`}}-ami-{{timestamp}}"
+        }
+      }
+    ]
+  }
