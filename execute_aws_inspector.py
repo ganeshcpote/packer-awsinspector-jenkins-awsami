@@ -7,7 +7,7 @@ import xml.etree.cElementTree as etree
 client = boto3.client('inspector')
 
 # set assessment template for stack
-assessmentTemplate  = 'arn:aws:inspector:us-east-1:735360830536:target/0-V4iBfnSO/template/0-VBwTCdd4'
+assessmentTemplate  = 'arn:aws:inspector:us-east-1:xxxx:target/0-V4iBfnSO/template/0-VBwTCdd4' #update assessmentTemplate arn here
 
 # start assessment run
 assessment = client.start_assessment_run(
