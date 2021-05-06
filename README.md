@@ -1,4 +1,4 @@
-# Packer and AWS Inspector Integration using Jenkins to create AMI
+# Golden image with vulnerabilities and security assessment scanning using AWS Inspector and Packer
 
 ## Overview
 The idea behind this solution is to create the Jenkins Pipeline to create AWS AMI using Packer and also run the AWS Inspector to find any vulnerabilities. The newly created AMI image names will be added/updated to System Manager Parameter Store for future reference. Currently using this pipeline you are able to create the plain Ubuntu, Java 1.8, ActiveMQ and ElasticSearch images. You can keep adding more software installation packages and update the configuration accordingly.
